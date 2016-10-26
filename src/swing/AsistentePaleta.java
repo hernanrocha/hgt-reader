@@ -3,11 +3,6 @@
  */
 package swing;
 
-import filtro.FiltroArchivoHGT;
-import filtro.FiltroArchivoPNG;
-import filtro.FiltroArchivoPaleta;
-import image.Imagen;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,6 +31,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import filtro.FiltroArchivoPaleta;
+import image.Imagen;
 import paleta.ImgMuestra;
 import paleta.Paleta;
 
