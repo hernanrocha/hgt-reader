@@ -95,13 +95,13 @@ public class LectorHGT {
     // Seleccionar archivo HGT desde JFileChooser
     protected void abrirArchivo() {
         JFileChooser fc = new JFileChooser("hgt");
+        fc.setFileFilter(new FiltroArchivoHGT());
 
         // Mostrar la ventana para abrir archivo y recoger la respuesta
-        fc.setFileFilter(new FiltroArchivoHGT());
-        int respuesta = fc.showOpenDialog(null);
+        int result = fc.showOpenDialog(null);
 
         // Comprobar si se ha pulsado Aceptar
-        if (respuesta == JFileChooser.APPROVE_OPTION) {
+        if (result == JFileChooser.APPROVE_OPTION) {
             abrirArchivo(fc.getSelectedFile());
         }
     }
@@ -125,7 +125,7 @@ public class LectorHGT {
                 } else if ("state".equals(evento) && evt.getNewValue().equals(StateValue.DONE)) {
                     // System.out.println("Tarea finalizada.");
                     LectorHGT.this.cargando.dispose();
-                    LectorHGT.this.imagen.mostrar(LectorHGT.this.labelImagen, LectorHGT.this.size);
+                    LectorHGT.this.imagen.show(LectorHGT.this.labelImagen, LectorHGT.this.size);
                     LectorHGT.this.cargado = true;
                     LectorHGT.this.mntmGuardar.setEnabled(true);
                 }
@@ -321,7 +321,7 @@ public class LectorHGT {
             public void actionPerformed(ActionEvent arg0) {
                 LectorHGT.this.size = 200;
                 if (LectorHGT.this.cargado) {
-                    LectorHGT.this.imagen.mostrar(LectorHGT.this.labelImagen, LectorHGT.this.size);
+                    LectorHGT.this.imagen.show(LectorHGT.this.labelImagen, LectorHGT.this.size);
                 }
             }
         });
@@ -334,7 +334,7 @@ public class LectorHGT {
             public void actionPerformed(ActionEvent arg0) {
                 LectorHGT.this.size = 400;
                 if (LectorHGT.this.cargado) {
-                    LectorHGT.this.imagen.mostrar(LectorHGT.this.labelImagen, LectorHGT.this.size);
+                    LectorHGT.this.imagen.show(LectorHGT.this.labelImagen, LectorHGT.this.size);
                 }
             }
         });
@@ -347,7 +347,7 @@ public class LectorHGT {
             public void actionPerformed(ActionEvent arg0) {
                 LectorHGT.this.size = 600;
                 if (LectorHGT.this.cargado) {
-                    LectorHGT.this.imagen.mostrar(LectorHGT.this.labelImagen, LectorHGT.this.size);
+                    LectorHGT.this.imagen.show(LectorHGT.this.labelImagen, LectorHGT.this.size);
                 }
             }
         });
@@ -361,7 +361,7 @@ public class LectorHGT {
             public void actionPerformed(ActionEvent arg0) {
                 LectorHGT.this.size = 900;
                 if (LectorHGT.this.cargado) {
-                    LectorHGT.this.imagen.mostrar(LectorHGT.this.labelImagen, LectorHGT.this.size);
+                    LectorHGT.this.imagen.show(LectorHGT.this.labelImagen, LectorHGT.this.size);
                 }
             }
         });
@@ -374,7 +374,7 @@ public class LectorHGT {
             public void actionPerformed(ActionEvent arg0) {
                 LectorHGT.this.size = 1201;
                 if (LectorHGT.this.cargado) {
-                    LectorHGT.this.imagen.mostrar(LectorHGT.this.labelImagen, LectorHGT.this.size);
+                    LectorHGT.this.imagen.show(LectorHGT.this.labelImagen, LectorHGT.this.size);
                 }
             }
         });
@@ -456,7 +456,7 @@ public class LectorHGT {
     public void refrescar() {
         if (this.cargado) {
             this.imagen.repaint();
-            this.imagen.mostrar(this.labelImagen, this.size);
+            this.imagen.show(this.labelImagen, this.size);
         }
     }
 
