@@ -6,14 +6,14 @@ import javax.swing.filechooser.FileFilter;
 
 public class FiltroArchivoPaleta extends FileFilter {
 
-	@Override
-	public boolean accept(File f) {
-		return f.getName().endsWith("pml") || f.isDirectory();
-	}
+    @Override
+    public boolean accept(File f) {
+        return f.getName().endsWith("pml") || f.isDirectory();
+    }
 
-	@Override
-	public String getDescription() {
-		return "Archivo Paleta (*.pml)";
-	}
+    @Override
+    public String getDescription() {
+        return "Archivo Paleta (*.pml)";
+    }
 
 }

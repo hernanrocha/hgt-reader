@@ -15,104 +15,104 @@ import paleta.Paleta;
 import swing.DialogCargarArchivo;
 
 public class Imagen {
-	
-	private int[][] matriz;
-	private BufferedImage buffImg;
-	private int size;
 
-	private Paleta paleta;
+    private int[][] matriz;
+    private BufferedImage buffImg;
+    private int size;
 
-	public void cargarHGT(File f, final DialogCargarArchivo cargando){
-		FileInputStream fileIn = null;
+    private Paleta paleta;
+
+    public void cargarHGT(File f, final DialogCargarArchivo cargando) {
+        FileInputStream fileIn = null;
         DataInputStream dataIn = null;
         int n;
-        int i = 0, fila, col;        
+        int i = 0, fila, col;
 
-//    	long begin = System.currentTimeMillis();
-    	
+        // long begin = System.currentTimeMillis();
+
         // Crear Imagen
-    	size = (int) Math.sqrt(f.length()/2);
-//    	System.out.println(size);
-    	matriz = new int[size][size];
-		buffImg = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-        
+        this.size = (int) Math.sqrt(f.length() / 2);
+        // System.out.println(size);
+        this.matriz = new int[this.size][this.size];
+        this.buffImg = new BufferedImage(this.size, this.size, BufferedImage.TYPE_INT_ARGB);
+
         // Leer archivo
-    	try {
-			fileIn = new FileInputStream(f);
-			dataIn = new DataInputStream(fileIn);
-			
+        try {
+            fileIn = new FileInputStream(f);
+            dataIn = new DataInputStream(fileIn);
+
             while (dataIn.available() > 0) {
-            	// Leer valor
-            	n = dataIn.readUnsignedShort();
-            	
-            	// Calcular posicion
-                col = i % size;
-                fila = (i - col) / size;
-                
+                // Leer valor
+                n = dataIn.readUnsignedShort();
+
+                // Calcular posicion
+                col = i % this.size;
+                fila = (i - col) / this.size;
+
                 // Asignar a matriz
-                matriz[fila][col] = n;
-                buffImg.setRGB(fila, col, paleta.getColor(n).getRGB());
-                
+                this.matriz[fila][col] = n;
+                this.buffImg.setRGB(fila, col, this.paleta.getColor(n).getRGB());
+
                 i++;
             }
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}    	
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-//    	long end = System.currentTimeMillis();
-    	
-//    	System.out.println("Tiempo de Procesamiento: " + (end - begin));
-	    
-	}
-	
-	public void repaint(){
-		for(int f = 0; f < size; f++){
-			for (int c = 0; c < size; c++){
-                buffImg.setRGB(f, c, paleta.getColor(matriz[f][c]).getRGB());
-			}
-		}
-	}
+        // long end = System.currentTimeMillis();
 
-	public void mostrar(JLabel label, int size){
-        //Escalar Imagen
-	    ImageIcon icon = new ImageIcon(buffImg);
+        // System.out.println("Tiempo de Procesamiento: " + (end - begin));
+
+    }
+
+    public BufferedImage getBufferedImage() {
+        return this.buffImg;
+    }
+
+    public Paleta getPaleta() {
+        return this.paleta;
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public void mostrar(JLabel label, int size) {
+        // Escalar Imagen
+        ImageIcon icon = new ImageIcon(this.buffImg);
         ImageIcon tmpIcon = new ImageIcon(icon.getImage().getScaledInstance(size, size, Image.SCALE_DEFAULT));
-    	label.setIcon(tmpIcon);
-	}
-	
-	public Paleta getPaleta() {
-		return paleta;
-	}
+        label.setIcon(tmpIcon);
+    }
 
-	public void setPaleta(Paleta paleta) {
-		this.paleta = paleta;
-	}
-	
-	public int getSize() {
-		return size;
-	}
+    public void repaint() {
+        for (int f = 0; f < this.size; f++) {
+            for (int c = 0; c < this.size; c++) {
+                this.buffImg.setRGB(f, c, this.paleta.getColor(this.matriz[f][c]).getRGB());
+            }
+        }
+    }
 
-	public void setSize(int size) {
-		this.size = size;
-	}
-	
-	public void setInterpolar(boolean interpolar){
-		this.paleta.setInterpolar(interpolar);
-	}
+    public void setBufferedImage(BufferedImage buffImg) {
+        this.buffImg = buffImg;
+    }
 
-	public void setMatriz(int[][] matriz) {
-		this.matriz = matriz;
-		
-	}
+    public void setInterpolar(boolean interpolar) {
+        this.paleta.setInterpolar(interpolar);
+    }
 
-	public void setBufferedImage(BufferedImage buffImg) {
-		this.buffImg = buffImg;	
-	}
-	
-	public BufferedImage getBufferedImage(){
-		return buffImg;
-	}
-	
+    public void setMatriz(int[][] matriz) {
+        this.matriz = matriz;
+
+    }
+
+    public void setPaleta(Paleta paleta) {
+        this.paleta = paleta;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
 }
